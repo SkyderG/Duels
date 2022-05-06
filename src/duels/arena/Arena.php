@@ -275,13 +275,6 @@ class Arena implements ArenaInterface
                 $this->setStatus(self::WAITING);
                 break;
         }
-
-        if ($this->getPlayerCount() > 0) {
-            foreach ($this->getPlayers() as $players => $value) {
-                $p = $this->getServer()->getPlayerExact($players);
-                if ($p) $this->getScoreboardManager()->updateScoreboard($p);
-            }
-        }
     }
 
     public function reset(): void
