@@ -36,6 +36,8 @@ class Loader extends PluginBase implements Listener
         $this->saveDefaultConfig();
         @mkdir($this->getDataFolder() . "lang/");
         @mkdir($this->getDataFolder() . "players/");
+        $this->saveResource("config.yml");
+
 
         $this->getLogger()->info("Loading Duel...");
 
