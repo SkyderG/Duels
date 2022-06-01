@@ -253,7 +253,20 @@ class Arena implements ArenaInterface
                     foreach ($this->getPlayers() as $player => $value) {
                         $player = $this->getServer()->getPlayerExact($player);
                         $player->sendMessage($this->getLanguageManager()->translateMessage("arena.started"));
-                        // TODO: kit.
+                        
+                        $player->getInventory()->clearAll();
+
+                        $player->getArmorInventory()->setHelmet(VanillaItems::IRON_HELMET());
+                        $player->getArmorInventory()->setChestplate(VanillaItems::IRON_CHESTPLATE());
+                        $player->getArmorInventory()->setLeggings(VanillaItems::IRON_LEGGINGS());
+                        $player->getArmorInventory()->setBoots(VanillaItems::IRON_BOOTS());
+
+                        $items = [
+                            VanillaItems::IRON_SWORD(),
+                            VanillaItems::GOLDEN_APPLE()->setCount(6),
+                            VanillaItems::STEAK()->setCount(32)
+                        ];
+                        $player->getInventory()->addItem(...$items);
                     }
                 }
 
