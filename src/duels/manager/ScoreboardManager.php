@@ -20,6 +20,7 @@ class ScoreboardManager
     public function __construct(Loader $plugin)
     {
         $this->plugin = $plugin;
+        $this->languageManager = $this->getPlugin()->getLanguageManager();
         $plugin->getScheduler()->scheduleRepeatingTask(new ScoreboardUpdate($plugin), 120);
     }
 
@@ -126,7 +127,6 @@ class ScoreboardManager
                         gmdate("i:s", $arena->getTime()),
 
                     ];
-                    var_dump($translated);
                     break;
             }
 
@@ -150,7 +150,7 @@ class ScoreboardManager
 
             foreach ($scorelines as $id => $line) {
                 $config = $langConfig->get("scoreboard")["lobby"][$id];
-                $lines[] = $this->getPlugin()->getLanguageManager()->translateMessage($config, $translated);
+                $lines[] = $this->getPlugin()->getLanguageManager()->translateMessageOld($config, $translated);
             }
 
             for ($i = 0; $i < count($lines); $i++) {
