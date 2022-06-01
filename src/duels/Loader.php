@@ -2,6 +2,7 @@
 
 namespace duels;
 
+use duels\lang\LanguageList;
 use duels\manager\PlayerManager;
 use duels\arena\ArenaManager;
 use duels\entity\DuelEntity;
@@ -20,6 +21,7 @@ use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\permission\DefaultPermissions;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
 use pocketmine\world\World;
 
 class Loader extends PluginBase implements Listener
@@ -33,13 +35,17 @@ class Loader extends PluginBase implements Listener
 
     protected function onLoad(): void
     {
-        $this->saveDefaultConfig();
-        @mkdir($this->getDataFolder() . "lang/");
-        @mkdir($this->getDataFolder() . "players/");
-
         $this->getLogger()->info("Loading Duel...");
 
-        $this->languageManager = new LanguageManager($this, $this->getConfig()->get("language"));
+       @mkdir($this->getDataFolder() . "players/");
+
+        foreach (scandir($this->getFile() . "resources/") as $file) {
+            if(!in_array($file, [".", ".."])) {
+                $this->saveResource($file);
+            }
+        }
+
+        $this->languageManager = new LanguageManager($this);
         $this->scoreboardManager = new ScoreboardManager($this);
     }
 
@@ -165,5 +171,10 @@ class Loader extends PluginBase implements Listener
             }
         }
         return false;
+    }
+
+    public function getConfig(): Config
+    {
+        return new Config($this->getDataFolder()."/config.yml", Config::YAML);
     }
 }
