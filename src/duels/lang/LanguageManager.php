@@ -19,6 +19,7 @@ class LanguageManager
     {
         $this->plugin = $plugin;
         $this->languageManager = $this->getPlugin()->getLanguageManager();
+        $plugin->getScheduler()->scheduleRepeatingTask(new ScoreboardUpdate($plugin), 120);
     }
 
     /**
