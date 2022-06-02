@@ -20,7 +20,6 @@ class ScoreboardManager
     public function __construct(Loader $plugin)
     {
         $this->plugin = $plugin;
-        $this->languageManager = $this->getPlugin()->getLanguageManager();
         $plugin->getScheduler()->scheduleRepeatingTask(new ScoreboardUpdate($plugin), 120);
     }
 
