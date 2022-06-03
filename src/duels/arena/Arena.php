@@ -3,10 +3,6 @@
 namespace duels\arena;
 
 use duels\manager\ScoreboardManager;
-use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIds;
-use pocketmine\item\VanillaItems;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -266,9 +262,9 @@ class Arena implements ArenaInterface
                         $player->getArmorInventory()->setBoots(ItemFactory::getInstance()->get(ItemIds::IRON_BOOTS));
 
                         $player->getInventory()->setItem(0, ItemFactory::getInstance()->get(ItemIds::IRON_SWORD, 0, 1));
-		                $player->getInventory()->setItem(1, ItemFactory::getInstance()->get(ItemIds::GOLDEN_APPLE, 0, 6));
-		                $player->getInventory()->setItem(2, ItemFactory::getInstance()->get(ItemIds::BOW, 0, 1));
-		                $player->getInventory()->setItem(3, ItemFactory::getInstance()->get(ItemIds::ARROW, 0, 16));
+                        $player->getInventory()->setItem(1, ItemFactory::getInstance()->get(ItemIds::GOLDEN_APPLE, 0, 6));
+                        $player->getInventory()->setItem(2, ItemFactory::getInstance()->get(ItemIds::BOW, 0, 1));
+                        $player->getInventory()->setItem(3, ItemFactory::getInstance()->get(ItemIds::ARROW, 0, 16));
                         $player->getInventory()->setItem(4, ItemFactory::getInstance()->get(ItemIds::STEAK, 0, 32));
                     }
                 }
