@@ -48,40 +48,96 @@ class PlayerManager
     {
         return isset($this->players[$player->getXuid()]);
     }
-
-    public function getPlayerConfig(Player $player): Config
-    {
-        return new Config(
-            $this->getPlugin()->getDataFolder() . "/players/" . $player->getName() . ".yml",
-            Config::YAML,
-            [
-                "kills" => 0,
-                "deaths" => 0
-            ]
-        );
-    }
-
-    public function addDeath(Player $player): void
-    {
-        if($this->exists($player)) {
-            $this->players[$player->getXuid()]["deaths"] += 1;
-        }
-    }
-
-    public function addKill(Player $player): void
-    {
-        if($this->exists($player)) {
-            $this->players[$player->getXuid()]["kills"] += 1;
-        }
-    }
-
-    public function getKills(Player $player): int
-    {
-        return $this->players[$player->getXuid()]["kills"];
-    }
-
-    public function getDeaths(Player $player): int
-    {
-        return $this->players[$player->getXuid()]["deaths"];
-    }
+    
+    public function addKill(Player $player, int $add = 1){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($player->getName())){
+			$tops->set($player->getName(), ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		$p = $tops->get($player->getName());
+		$p["kills"] = ($p["kills"] + $add);
+		$tops->set($player->getName(), $p);
+		$tops->save();
+	}
+	
+	public function addKillByName(string $name, int $add = 1){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($name)){
+			$tops->set($name, ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		$p = $tops->get($name);
+		$p["kills"] = ($p["kills"] + $add);
+		$tops->set($name, $p);
+		$tops->save();
+	}
+	
+	public function addDeath(Player $player, int $add = 1){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($player->getName())){
+			$tops->set($player->getName(), ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		$p = $tops->get($player->getName());
+		$p["deaths"] = ($p["deaths"] + $add);
+		$tops->set($player->getName(), $p);
+		$tops->save();
+	}
+	
+	public function addDeathByName(string $name, int $add = 1){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($name)){
+			$tops->set($name, ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		$p = $tops->get($name);
+		$p["deaths"] = ($p["deaths"] + $add);
+		$tops->set($name, $p);
+		$tops->save();
+	}
+	
+	public function getKills(Player $player){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($player->getName())){
+			$tops->set($player->getName(), ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		return $tops->get($player->getName())["kills"];
+	}
+	
+	public function getKillsByName(string $name){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($name)){
+			$tops->set($name, ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		return $tops->get($name)["kills"];
+	}
+	
+	public function getDeaths(Player $player){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($player->getName())){
+			$tops->set($player->getName(), ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		return $tops->get($player->getName())["deaths"];
+	}
+	
+	public function getDeathsByName(string $name){
+		$tops = new Config($this->getDataFolder() . "tops.yml", Config::YAML);
+		if(!$tops->get($name)){
+			$tops->set($name, ["kills" => 0, "deaths" => 0]);
+			$tops->save();
+		}
+		
+		return $tops->get($name)["deaths"];
+	}
 }
