@@ -1,17 +1,18 @@
-name: "Duels"
-author: "Skyder"
-api: [4.0.0]
-
+name: Duels
+version: 1.0.0
+api: ["4.0.0"]
 main: duels\Loader
-version: "0.0.1"
-website: "https://github.com/SkyderG/DuelPlugin"
+author: ["Skyder", "FaizDev"]
+
+website: https://github.com/SkyderG/Duels
 
 commands:
   duels:
-    description: "Duel plugin management."
+    description: Duel plugin management.
     permission: duels.usage
     aliases:
       - duel
+      - 1vs1
 
 permissions:
   duels.usage:
