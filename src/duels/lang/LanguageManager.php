@@ -18,7 +18,8 @@ class LanguageManager
     public function __construct(Loader $plugin, string $language)
     {
         $this->plugin = $plugin;
-        $this->languageManager = $this->getPlugin()->getLanguageManager();
+        $this->language = $language;
+        $this->lconfig = new Config($this->getPlugin()->getDataFolder() . "/lang/" . $this->getLanguage() . ".yml", Config::YAML);
     }
 
     /**
