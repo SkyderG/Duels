@@ -2,7 +2,6 @@
 
 namespace duels;
 
-use duels\lang\LanguageList;
 use duels\manager\PlayerManager;
 use duels\arena\ArenaManager;
 use duels\entity\DuelEntity;
