@@ -3,6 +3,10 @@
 namespace duels\arena;
 
 use duels\manager\ScoreboardManager;
+use pocketmine\item\Item;
+use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIds;
+use pocketmine\item\VanillaItems;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -255,18 +259,17 @@ class Arena implements ArenaInterface
                         $player->sendMessage($this->getLanguageManager()->translateMessage("arena.started"));
                         
                         $player->getInventory()->clearAll();
+                        
+                        $player->getArmorInventory()->setHelmet(ItemFactory::getInstance()->get(ItemIds::IRON_HELMET));
+                        $player->getArmorInventory()->setChestplate(ItemFactory::getInstance()->get(ItemIds::IRON_CHESTPLATE));
+                        $player->getArmorInventory()->setLeggings(ItemFactory::getInstance()->get(ItemIds::IRON_LEGGINGS));
+                        $player->getArmorInventory()->setBoots(ItemFactory::getInstance()->get(ItemIds::IRON_BOOTS));
 
-                        $player->getArmorInventory()->setHelmet(VanillaItems::IRON_HELMET());
-                        $player->getArmorInventory()->setChestplate(VanillaItems::IRON_CHESTPLATE());
-                        $player->getArmorInventory()->setLeggings(VanillaItems::IRON_LEGGINGS());
-                        $player->getArmorInventory()->setBoots(VanillaItems::IRON_BOOTS());
-
-                        $items = [
-                            VanillaItems::IRON_SWORD(),
-                            VanillaItems::GOLDEN_APPLE()->setCount(6),
-                            VanillaItems::STEAK()->setCount(32)
-                        ];
-                        $player->getInventory()->addItem(...$items);
+                        $player->getInventory()->setItem(0, ItemFactory::getInstance()->get(ItemIds::IRON_SWORD, 0, 1));
+		                $player->getInventory()->setItem(1, ItemFactory::getInstance()->get(ItemIds::GOLDEN_APPLE, 0, 6));
+		                $player->getInventory()->setItem(2, ItemFactory::getInstance()->get(ItemIds::BOW, 0, 1));
+		                $player->getInventory()->setItem(3, ItemFactory::getInstance()->get(ItemIds::ARROW, 0, 16));
+                        $player->getInventory()->setItem(4, ItemFactory::getInstance()->get(ItemIds::STEAK, 0, 32));
                     }
                 }
 
