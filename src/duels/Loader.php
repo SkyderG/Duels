@@ -34,17 +34,13 @@ class Loader extends PluginBase implements Listener
 
     protected function onLoad(): void
     {
+        $this->saveDefaultConfig();
+        @mkdir($this->getDataFolder() . "lang/");
+        @mkdir($this->getDataFolder() . "players/");
+
         $this->getLogger()->info("Loading Duel...");
 
-       @mkdir($this->getDataFolder() . "players/");
-
-        foreach (scandir($this->getFile() . "resources/") as $file) {
-            if(!in_array($file, [".", ".."])) {
-                $this->saveResource($file);
-            }
-        }
-
-        $this->languageManager = new LanguageManager($this);
+        $this->languageManager = new LanguageManager($this, $this->getConfig()->get("language"));
         $this->scoreboardManager = new ScoreboardManager($this);
     }
 
