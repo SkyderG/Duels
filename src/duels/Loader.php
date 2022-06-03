@@ -95,7 +95,7 @@ class Loader extends PluginBase implements Listener
 
         if ($command->getName() == "duels") {
             if (!isset($args[0])) {
-                if ($sender->hasPermission(DefaultPermissions::ROOT_OPERATOR)) {
+                if ($sender->hasPermission(duels.usage)) {
                     $sender->sendMessage("§c/duels create [arena]\n§c/duels setspawn [1:2]\n§c/duels build\n§c/duels setentity\n§c/duels join - quit");
                 } else {
                     $sender->sendMessage("§c/duels [join - quit]");
