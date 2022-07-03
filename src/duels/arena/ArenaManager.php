@@ -76,7 +76,7 @@ class ArenaManager
     public function isFreeArena(Arena $arena): bool
     {
         if ($arena->getStatus() == Arena::WAITING) return true;
-        if ($arena->getStatus() == Arena::STARTING && $arena->getPlayerCount() == 1 or $arena->getPlayerCount() == 0 or $arena->getPlayerCount() < 8) return true;
+        if ($arena->getStatus() == Arena::STARTING && $arena->getPlayerCount() == 1 or $arena->getPlayerCount() == 0) return true;
 
         return false;
     }
